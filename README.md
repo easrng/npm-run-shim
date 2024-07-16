@@ -1,0 +1,4 @@
+# npm-run-shim
+I use corepack to manage all my node package managers, including NPM. This causes some issues when tools are hardcoded to run scripts with NPM, because I get a `UsageError: This project is configured to use <packageManager> because /path/to/package.json has a "packageManager" field` error. Installing this package fixes the problem¹, without allowing NPM to do non-script-running things. You can also change what script runner is used by setting $NPM_RUN_SHIM_RUNNER in your environment.
+
+¹ as long as your package manager's global bin folder is in $PATH before the corepack bin folder

@@ -1,0 +1,30 @@
+{
+  "name": "npm-run-shim",
+  "version": "1.0.0",
+  "description": "allow `npm run-script` in projects that use a different packageManager",
+  "bin": {
+    "npm": "./bin/shim"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easrng/npm-run-shim.git"
+  },
+  "keywords": [
+    "npm run",
+    "npm",
+    "pnpm",
+    "yarn",
+    "corepack"
+  ],
+  "author": "easrng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/easrng/npm-run-shim/issues"
+  },
+  "homepage": "https://github.com/easrng/npm-run-shim#readme",
+  "type": "module",
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
+}

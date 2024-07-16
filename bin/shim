@@ -1,0 +1,23 @@
+#!/bin/sh
+cmd="$1"
+case "$cmd" in
+"run" | "rum" | "urn")
+    cmd="run-script"
+    ;;
+"tst" | "t")
+    cmd="test"
+    ;;
+esac
+case "$cmd" in
+"run-script" | "stop" | "start" | "restart" | "test")
+    if [ "$cmd" = "run-script" ]; then
+        shift
+        cmd="$1"
+    fi
+    shift
+    COREPACK_ENABLE_STRICT=0 exec "${NPM_RUN_SHIM_RUNNER:-npm}" run-script "$cmd" "$@"
+    ;;
+*)
+    exec npm "$@"
+    ;;
+esac

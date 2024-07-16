@@ -1,12 +1,13 @@
 {
   "name": "npm-run-shim",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "allow `npm run-script` in projects that use a different packageManager",
   "bin": {
     "npm": "./bin/shim"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test2",
+    "test2": "echo hi uwu"
   },
   "repository": {
     "type": "git",

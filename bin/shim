@@ -1,4 +1,26 @@
 #!/bin/sh
+if [ -n "$_NPM_RUN_SHIM_SKIPME" ]; then
+    exit 119
+fi
+find_npm() {
+    for dir in $(printf "%s" "$PATH" | tr ':' '\n'); do
+        if [ -x "$dir/npm" ]; then
+            _NPM_RUN_SHIM_SKIPME=1 "$dir/npm" --version >/dev/null 2>&1
+            if [ "$?" != 119 ]; then
+                real_npm="$dir/npm"
+                break
+            fi
+        fi
+    done
+    if [ -z "$real_npm" ]; then
+        printf "npm-run-shim couldn't find npm\n" >&2
+        exit 1
+    fi
+}
+if [ "${NPM_RUN_SHIM_RUNNER:-npm}" = "npm" ]; then
+    find_npm
+    NPM_RUN_SHIM_RUNNER="$real_npm"
+fi
 cmd="$1"
 case "$cmd" in
 "run" | "rum" | "urn")
@@ -15,9 +37,12 @@ case "$cmd" in
         cmd="$1"
     fi
     shift
-    COREPACK_ENABLE_STRICT=0 exec "${NPM_RUN_SHIM_RUNNER:-npm}" run-script "$cmd" "$@"
+    COREPACK_ENABLE_STRICT=0 exec "${NPM_RUN_SHIM_RUNNER}" run-script "$cmd" "$@"
     ;;
 *)
-    exec npm "$@"
+    if [ -z "$real_npm" ]; then
+        find_npm
+    fi
+    exec "$real_npm" "$@"
     ;;
 esac

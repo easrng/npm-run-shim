@@ -23,21 +23,21 @@ if [ "${NPM_RUN_SHIM_RUNNER:-npm}" = "npm" ]; then
 fi
 cmd="$1"
 case "$cmd" in
-"run" | "rum" | "urn")
-    cmd="run-script"
+"run-script" | "rum" | "urn")
+    cmd="run"
     ;;
 "tst" | "t")
     cmd="test"
     ;;
 esac
 case "$cmd" in
-"run-script" | "stop" | "start" | "restart" | "test")
-    if [ "$cmd" = "run-script" ]; then
+"run" | "stop" | "start" | "restart" | "test")
+    if [ "$cmd" = "run" ]; then
         shift
         cmd="$1"
     fi
     shift
-    COREPACK_ENABLE_STRICT=0 exec "${NPM_RUN_SHIM_RUNNER}" run-script "$cmd" "$@"
+    COREPACK_ENABLE_STRICT=0 exec "${NPM_RUN_SHIM_RUNNER}" run "$cmd" "$@"
     ;;
 *)
     if [ -z "$real_npm" ]; then

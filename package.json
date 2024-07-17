@@ -1,6 +1,6 @@
 {
   "name": "npm-run-shim",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "allow `npm run-script` in projects that use a different packageManager",
   "bin": {
     "npm": "./bin/shim"
